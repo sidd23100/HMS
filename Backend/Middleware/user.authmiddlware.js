@@ -3,22 +3,29 @@ import { APIError } from '../utils/APIError.js'
 
 const verifyToken = async (req, res, next) => {
 
-    const authHeaders = req.headers['authorization']
+    try {
+        const authHeaders = req.headers['authorization']
 
-    const token = authHeaders && authHeaders.split(' ')[1]
+        const token = authHeaders && authHeaders.split(' ')[1]
 
-    if (!token) {
-        throw new APIError(400, "You are not LoggedIn")
-    }
-
-    await jwt.verify(token, process.env.JWT_Secret_Key, (err, user) => {
-        if (err) {
-            return next(err)
+        if (!token) {
+            res.status(400).json(
+                next(new APIError(400, "you are not loggedIn")))
         }
 
-        req.user = user
-        next()
-    })
+        await jwt.verify(token, process.env.JWT_Secret_key, (err, user) => {
+            if (err) {
+                return next(err)
+            }
+
+            req.user = user
+            next()
+        })
+
+    }
+    catch (error) {
+        next(`user authmiddleware error : ${error}`)
+    }
 
 }
 

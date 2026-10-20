@@ -14,7 +14,9 @@ app.use(express.json())
 // routes
 
 import { router as UserRouter }from "./Routes/user.routes.js"
+import { departmentRouter } from "./Routes/department.routes.js";
 
-app.use("/api/v1.0/user", UserRouter)
+app.use("/api/v1", UserRouter)
+app.use("/api/v1", departmentRouter)
 
 export { app }

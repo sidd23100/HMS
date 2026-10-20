@@ -1,11 +1,8 @@
-import { userLogin } from "../Services/user.authService.js"
+import { userLogin } from "../Services/user.loginService.js"
 import { adminRegisterService } from "../Services/user.registerervice.js"
 import { APIResponse } from "../utils/APIResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
-const getAllUsers = (req, res) => {
-    res.send("Welcome")
-}
 
 const adminController = asyncHandler(async (req, res) => {
     const adminData = await adminRegisterService(req.body)
@@ -23,4 +20,4 @@ const userLoginController = asyncHandler(async (req, res) => {
 })
 
 
-export { getAllUsers, adminController, userLoginController }
+export { adminController, userLoginController }
