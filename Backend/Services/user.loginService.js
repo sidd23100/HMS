@@ -18,7 +18,7 @@ const userLogin = async (data) => {
             throw new APIError(404, "Invalid Email OR Password")
         }
 
-        const payload = { name : user.name, email : user.email, role :user.role }
+        const payload = { userId : user._id, name : user.name, email : user.email, role :user.role }
        
         const token = await jwt.sign(payload, process.env.JWT_Secret_key, {expiresIn : '15m'} )
         

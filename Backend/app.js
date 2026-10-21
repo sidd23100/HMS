@@ -15,8 +15,10 @@ app.use(express.json())
 
 import { router as UserRouter }from "./Routes/user.routes.js"
 import { departmentRouter } from "./Routes/department.routes.js";
+import { hospitalRouter } from "./Routes/hospital.routes.js";
 
 app.use("/api/v1", UserRouter)
+app.use("/api/v1", hospitalRouter)
 app.use("/api/v1", departmentRouter)
 
 export { app }

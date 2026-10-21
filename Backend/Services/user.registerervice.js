@@ -10,19 +10,10 @@ const adminRegisterService = async (data) => {
         throw new APIError(400, "All fields are required")
     }
 
-    if (!hospitalName || !hospitalEmail || !hospitalPhone || !hospitalAddress) {
-        throw new APIError(400, "hospital details are required")
-    }
-
     const existedAdmin = await User.findOne({ email: email })
-    const existedHospital = await Hospital.findOne({ hospitalEmail: hospitalEmail })
 
     if (existedAdmin) {
         throw new APIError(400, "Admin already registered")
-    }
-
-    if (existedHospital) {
-        throw new APIError(400, "Hospital already registered")
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
@@ -35,14 +26,7 @@ const adminRegisterService = async (data) => {
         role
     })
 
-    const hospital = await Hospital.create({
-        hospitalName,
-        hospitalEmail,
-        hospitalPhone,
-        hospitalAddress
-    })
-
-    return { admin, hospital }
+    return { admin }
 
 }
 

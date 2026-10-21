@@ -1,5 +1,4 @@
 import { newDepartment } from "../Services/department.service.js";
-import { APIError } from "../utils/APIError.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 

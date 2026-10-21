@@ -2,26 +2,27 @@ import mongoose, { Schema } from "mongoose"
 
 const hospitalSchema = new mongoose.Schema(
     {
-        owner: {
-            type : mongoose.Types.ObjectId,
-            ref : "User"
-        },
-        hospitalName : {
+        name : {
             type : String,
             required :  true,
         },
-        hospitalEmail : {
+        email : {
             type :  String,
             required : true,
             unique : true
         },
-        hospitalPhone : {
+        phone : {
             type : Number,
             required : true,
             unique : true
         },
-        hospitalAddress : {
+        address : {
             type : String,
+            required : true
+        },
+        owner: {
+            type : mongoose.Types.ObjectId,
+            ref : "User",
             required : true
         }
     }
