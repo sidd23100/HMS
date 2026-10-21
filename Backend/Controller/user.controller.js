@@ -1,11 +1,11 @@
 import { userLogin } from "../Services/user.loginService.js"
-import { adminRegisterService } from "../Services/user.registerervice.js"
+import { userRegistrationServices } from "../Services/user.registerervice.js"
 import { APIResponse } from "../utils/APIResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
 
 const adminController = asyncHandler(async (req, res) => {
-    const adminData = await adminRegisterService(req.body)
+    const adminData = await userRegistrationServices(req.body)
     res.status(201).json(
         new APIResponse(201, "Success", adminData)
     )
