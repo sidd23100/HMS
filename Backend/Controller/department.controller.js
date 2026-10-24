@@ -3,7 +3,7 @@ import { APIResponse } from "../utils/APIResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const newDepartmentController = asyncHandler(async(req, res) =>{
-        const department = await newDepartment(req.body)
+        const department = await newDepartment(req.body, req.params.hospitalId)
         return res.status(201).json(
             new APIResponse(201, "Department Created", department)
         )

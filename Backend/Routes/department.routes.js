@@ -7,6 +7,6 @@ const departmentRouter = Router()
 
 // departmentRouter.route("/department").get(verifyToken, authorization("ADMIN"), getAllDepartment)
 
-departmentRouter.route("/department/register").post(verifyToken, authorization("ADMIN"), newDepartmentController)
+departmentRouter.route("/department/register/:hospitalId").post(verifyToken, authorization("ADMIN"), newDepartmentController)
 
 export { departmentRouter }

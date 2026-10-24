@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const departmentSchema = new mongoose.Schema({
-    hospitalId : {
-        type : mongoose.Types.ObjectId,
-        ref: "Hospital"
-    },
     department : {
         type : String,
         required : true
@@ -14,6 +10,11 @@ const departmentSchema = new mongoose.Schema({
     },
     description : {
         type : String,
+        required : true
+    },
+    hospitalId : {
+        type : mongoose.Types.ObjectId,
+        ref: "Hospital",
         required : true
     }
 })
