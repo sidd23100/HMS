@@ -36,7 +36,7 @@ const getHospitalServices = async (userId) => {
     return { hospitals }
 }
 
-const updateHospitalServices = async (data, hospitalId) => {
+const updateHospitalServices = async (data, hospitalId, userId) => {
    
     // check the format of the provided _id
     if (!mongoose.Types.ObjectId.isValid(hospitalId)) {
@@ -44,7 +44,7 @@ const updateHospitalServices = async (data, hospitalId) => {
     }
 
     // check the existance of the hospital
-    const hospital = await Hospital.findById(hospitalId)
+    const hospital = await Hospital.findById({ $and : [{_id : hospitalId}, {owner : userId}]})
 
     if (!hospital) {
         throw new APIError(400, "Choose correct Hospital OR registered hospital first")
@@ -68,6 +68,7 @@ const updateHospitalServices = async (data, hospitalId) => {
     if(address !== undefined)
         updatedFields.address = address
 
+    // checked the user modified field
     if(Object.keys(updatedFields).length === 0){
         throw new APIError(400, "you haven't changed anything")
     }
@@ -83,4 +84,14 @@ const updateHospitalServices = async (data, hospitalId) => {
     
 }
 
-export { createHospital, getHospitalServices, updateHospitalServices }
+
+const deleteHospitalServices = async(hospitalId, userId) => {
+    const hospital = await Hospital.findOneAndDelete({$and: [{_id : hospitalId}, {owner : userId}]})
+    if(!hospital){
+        throw new APIError(400, "hospital not found")
+    }
+    return { hospital }
+}
+
+
+export { createHospital, getHospitalServices, updateHospitalServices, deleteHospitalServices }

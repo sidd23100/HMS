@@ -4,7 +4,7 @@ import { APIResponse } from "../utils/APIResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 
 
-const adminController = asyncHandler(async (req, res) => {
+const userController = asyncHandler(async (req, res) => {
     const adminData = await userRegistrationServices(req.body)
     res.status(201).json(
         new APIResponse(201, "Success", adminData)
@@ -20,4 +20,4 @@ const userLoginController = asyncHandler(async (req, res) => {
 })
 
 
-export { adminController, userLoginController }
+export { userController, userLoginController }

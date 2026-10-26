@@ -1,4 +1,4 @@
-import { createHospital, getHospitalServices, updateHospitalServices } from "../Services/hospital.services.js";
+import { createHospital, deleteHospitalServices, getHospitalServices, updateHospitalServices } from "../Services/hospital.services.js";
 import { APIResponse } from "../utils/APIResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
@@ -25,11 +25,18 @@ const getHospitalController = asyncHandler(async(req, res) => {
 })
 
 const updateHospitalController = asyncHandler(async(req, res) => {
-    const updatedHospital = await updateHospitalServices(req.body, req.params.hospitalId)
+    const updatedHospital = await updateHospitalServices(req.body, req.params.hospitalId, req.user.userId)
 
     res.status(200).json(
         new APIResponse(200, "update successfully", updatedHospital)
     )
 })
 
-export{ createHospitalController, getHospitalController, updateHospitalController }
+const deleteHospitalController = asyncHandler(async(req, res) => {
+    const deletedHospital = await deleteHospitalServices(req.params.hospitalId, req.user.userId)
+    res.status(200).json(
+        new APIResponse(200, "Hospital Deleted", deletedHospital)
+    )
+})
+
+export{ createHospitalController, getHospitalController, updateHospitalController , deleteHospitalController}

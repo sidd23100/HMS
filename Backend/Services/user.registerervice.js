@@ -30,4 +30,5 @@ const userRegistrationServices = async (data) => {
 
 }
 
+
 export { userRegistrationServices }
